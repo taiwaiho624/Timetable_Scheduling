@@ -7,4 +7,4 @@ A program that help register a better timetable
 3. open outout.sls to check the result
 
 sameple output:
-![image](https://github.com/taiwaiho624/Timetable_Scheduling/blob/master/sample%20output.png)
+![image](https://github.com/taiwaiho624/Timetable_Scheduling/blob/master/images/sample%20output.png)
