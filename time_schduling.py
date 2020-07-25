@@ -175,29 +175,31 @@ def write_to_excel(result_list=[]):
     if(result_list != []):
         wb.save('output.xls')
 
-input_file = sys.argv[1]
-num_course = int(sys.argv[2])
-courselist = []
+if __name__ == '__main__':
+    input_file = sys.argv[1]
+    num_course = int(sys.argv[2])
+    courselist = []
 
-with open(input_file) as csvfile:
-    rows = csv.reader(csvfile)
-    for row in rows:
-        code = row[0]
-        name = row[1]
-        schedule = []
-        l = chunks(row[2:], 3)
-        for s in l:
-            day = int(s[0])
-            starttime = int(s[1])
-            endtime = int(s[2])
-            schedule.append({
-                'day' : day,
-                'time' : (starttime, endtime)
-            })
-        new_course = Course(code,name,schedule)
-        courselist.append(new_course)    
 
-all_time_timetables = generate_all_combinations(courselist, num_course)
-dependencies = generate_all_dependency(courselist)
-result_list = remove_conflict(all_time_timetables, dependencies)
-write_to_excel(result_list)
+    with open(input_file) as csvfile:
+        rows = csv.reader(csvfile)
+        for row in rows:
+            code = row[0]
+            name = row[1]
+            schedule = []
+            l = chunks(row[2:], 3)
+            for s in l:
+                day = int(s[0])
+                starttime = int(s[1])
+                endtime = int(s[2])
+                schedule.append({
+                    'day' : day,
+                    'time' : (starttime, endtime)
+                })
+            new_course = Course(code,name,schedule)
+            courselist.append(new_course)    
+
+    all_time_timetables = generate_all_combinations(courselist, num_course)
+    dependencies = generate_all_dependency(courselist)
+    result_list = remove_conflict(all_time_timetables, dependencies)
+    write_to_excel(result_list)
